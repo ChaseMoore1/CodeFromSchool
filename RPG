@@ -1,0 +1,239 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class NPC
+{
+private:
+	string namesky;
+	float hp;
+	float attack;
+	float defense;
+	int ClassID;
+public:
+	NPC()
+	{
+		string namesky = "";
+		float hp = 1;
+		float attack = 0;
+		float defense = 0;
+		int ClassID = 1;
+	}
+	NPC(string namesky1, float hp1, float attack1, float defense1)
+
+	{
+		namesky = namesky1;
+		hp = hp1;
+		attack = attack1;
+		defense = defense1;
+	}
+
+	float gethp(float r)
+	{
+		float y = hp;
+		return y;
+	}
+	float getattack()
+	{
+		float k = attack;
+		return k;
+	}
+	float getdefense()
+	{
+		float p = defense;
+		return p;
+	}
+	float sethp(float k)
+	{
+		float p;
+		hp -= k;
+		p = hp;
+		return p;
+	}
+	string getname()
+	{
+		string p = namesky;
+		return p;
+	}
+	float calclulateAttack(float u)
+	{
+		float p;
+		float what = 1.0 - u;
+		p = attack * (what);
+		return p;
+	}
+	float calculateDefense(float attackpower)
+	{
+		float q;
+		q = attackpower * (1.0 - defense) - 6;
+		return q;
+	}
+	bool isStillAlive(float c)
+	{
+		bool howdy = 0;
+		if (c > 0)
+		{
+			howdy = 1;
+		}
+		return howdy;
+	}
+};
+
+bool isStillAlive(int waht)
+{
+	bool howdy;
+	if (waht == true)
+	{
+		howdy = 1;
+	}
+	else
+	{
+		howdy = 0;
+	}
+	return howdy;
+}
+
+int main()
+{
+	string d, classclown, customname;
+	float defense1, attack1, hp1;
+	int ClassID1 = 1;
+	srand(time(0));
+
+	cout << "[Generic RPG Battle System]\nEnter your name: ";
+	getline(cin, customname);
+	cout << "Enter your battle class: ";
+	getline(cin, classclown);
+
+	if (classclown == "Sword Fighter")
+	{
+		d = "Sword Fighter";
+		hp1 = 120;
+		attack1 = 40;
+		defense1 = 0.20f;
+	}
+	else if (classclown == "Unicorn Sorcerer")
+	{
+		d = "Unicorn Sorcerer";
+		hp1 = 80;
+		attack1 = 35;
+		defense1 = 0.60f;
+	}
+	else
+	{
+		d = "Dance Battler";
+		hp1 = 100;
+		attack1 = 20;
+		defense1 = 0.42f;
+	}
+
+	NPC* p1 = new NPC(d, hp1, attack1, defense1);
+	int rando = rand() % 3;
+	string x = "Sword Fighter";
+	float y = 120;
+	float z = 40;
+	float q = 0.20f;
+
+	if (rando == 1)
+	{
+		x = "Sword Fighter";
+		y = 120;
+		z = 40;
+		q = 0.20f;
+	}
+
+	else if (rando == 2)
+	{
+		x = "Unicorn Sorcerer";
+		y = 80;
+		z = 35;
+		q = 0.60f;
+	}
+
+	else if (rando == 3)
+
+	{
+		x = "Dance Battler";
+		y = 100;
+		z = 20;
+		q = 0.42f;
+	}
+
+	NPC* e1 = new NPC(x, y, z, q);
+
+	float tank = 1;
+	float kpop = 1;
+	int checker = 1;
+	int checker2 = 1;
+	float tracker = 1;
+	float tracker2 = 1;
+	cout << endl << customname << " the " << p1->getname() << ", your opponent is gilbert the " << e1->getname() << "!";
+	int h = 1;
+
+	while (checker && checker2)
+	{
+		char atc;
+
+		cout << "\n\n-Round " << h << "-";
+		cout << "\nDo you want to (a)ttack or (d)effend? ";
+		cin >> atc;
+
+		int lol = rand() % 2;
+
+		if (atc == 'a' && lol == 0)
+
+		{
+			cout << customname << " the " << p1->getname() << " attacked gilbert the " << e1->getname() << "!";
+			tank = e1->calculateDefense(p1->getattack());
+			cout << "\ngilbert the " << e1->getname() << " is on guard." << endl;
+			tracker2 = e1->sethp(tank);
+			cout << "gilbert now has " << tracker2 << " HP.";
+		}
+
+		else if (atc == 'a' && lol == 1)
+		{
+			cout << customname << " the " << p1->getname() << " attacked gilbert the " << e1->getname() << "!" << endl;
+			tank = p1->calclulateAttack(e1->getdefense());
+			tracker2 = e1->sethp(tank);
+			cout << "gilbert now has " << tracker2 << " HP." << endl;
+			cout << "gilbert the " << e1->getname() << " attacked " << customname << " the " << e1->getname() << "!" << endl;
+			kpop = e1->calclulateAttack(p1->getdefense());
+			tracker = p1->sethp(kpop);
+			cout << customname << " now has " << tracker << " HP." << endl;
+		}
+
+		else if (atc == 'd' && lol == 1)
+		{
+			cout << customname << " the " << p1->getname() << " is on guard.\n";
+			cout << "gilbert the " << e1->getname() << " attacked " << customname << "  the " << e1->getname() << "!" << endl;
+			kpop = p1->calculateDefense(e1->getattack());
+			tracker = p1->sethp(kpop);
+			cout << customname << " now has " << tracker << " HP." << endl;
+		}
+		else
+		{
+			cout << customname << " the " << p1->getname() << " is on guard." << endl;
+			cout << "gilbert the " << e1->getname() << " is on guard." << endl;
+		}
+		h++;
+		if (tracker > 0)
+		{
+			checker2 = p1->isStillAlive(1);
+		}
+		else if (tracker < 0)
+		{
+			checker2 = p1->isStillAlive(0);
+			cout << endl << customname << " the " << p1->getname() << " was defeated....\ngilbert the " << e1->getname() << " wins!";
+		}
+		if (tracker2 > 0)
+		{
+			checker = e1->isStillAlive(1);
+		}
+		else if (tracker2 < 0)
+		{
+			checker = e1->isStillAlive(0);
+			cout << "\ngilbert the " << e1->getname() << " was defeated....\n" << customname << " the " << p1->getname() << " wins!";
+		}
+	}
+}
