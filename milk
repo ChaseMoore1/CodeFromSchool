@@ -1,0 +1,173 @@
+#include <iostream>
+//#include <string>
+
+using namespace std;
+
+class howdy
+{
+private:
+	string description;
+	int ID;
+	float price;
+	int quantity;
+public:
+	howdy()
+	{
+		description = "null";
+		ID = 010;
+		price = .0001;
+		quantity = 0.0;
+	}
+	howdy(string desgnation, int identification, float topenny, int quant)
+	{
+		description = desgnation;
+		ID = identification;
+		price = topenny;
+		quantity = quant;
+	}
+	//I realize now that I over did it with the setter's but the code runs just fine. 
+	//setter
+	int subtractmilk(int howdy)
+	{
+		int p;
+		quantity -= howdy;
+		return quantity;
+	}
+	int subtractbread(int howdy1)
+	{
+		int p;
+		quantity -= howdy1;
+		p = quantity;
+		return p;
+	}
+	int addmilk(int howdy2)
+	{
+		int p;
+		quantity += howdy2;
+		p = quantity;
+		return p;
+	}
+	int addbread(int howdy3)
+	{
+		int p;
+		quantity += howdy3;
+		p = quantity;
+		return p;
+	}
+	int subtractpricemilk(float subtract)
+	{
+		int p;
+		price -= subtract;
+		p = price;
+		return p;
+	}
+	float changepriceomlk(float thechange)
+	{
+		float p;
+		price = thechange;
+		p = price;
+		return p;
+	}
+	float changepriceobread(float thechange1)
+	{
+		float p;
+		price = thechange1;
+		p = price;
+		return p;
+	}
+	void getitems()
+	{
+		string a = description;
+		int b = ID;
+		float c = price;
+		int d = quantity;
+		cout << a << "\n" << "Id: " << b << " Price: " << c << " Quantity: " << d;
+	}
+};
+
+
+int main()
+{
+	string description;
+	int ID;
+	float price;
+	int quantity;
+
+	//milk initiation
+	cout << "Please enter the a description for milk: ";
+		cin >> description;
+	cout << "Please enter the special ID for milk: ";
+		cin >> ID;
+	cout << "Please enter the price of milk: ";
+		cin >> price;
+	cout << "Please enter it's quantity: ";
+		cin >> quantity;
+
+	howdy* milk = new howdy(description, ID, price, quantity);
+
+	//bread initiation
+	cout << "Please enter the a description for bread: ";
+		cin >> description;
+	cout << "Please enter the special ID for bread: ";
+		cin >> ID;
+	cout << "Please enter the price of bread: ";
+		cin >> price;
+	cout << "Please enter it's quantity: ";
+		cin >> quantity;
+
+	howdy* bread = new howdy(description, ID, price, quantity); 
+	
+	int userInput;
+	do{
+	cout << "1. Sold One Milk\n2. Sold one Bread\n3. Change Price of Milk\n4. Change Price of Bread\n5. Add Milk to Inventory\n";
+	cout << "6. Add Bread to Inventory\n7. See Inventory\n8. Quit\nPlease press what you want to do";
+		cin >> userInput;
+	
+		switch (userInput)
+		{
+		case 1:
+			cout << milk->subtractmilk(1);
+			break;
+
+		case 2:
+			bread->subtractbread(1);
+			cout << bread->subtractbread(1);
+			break;
+
+		case 3:
+			float pricechage;
+			cout << "what do you want to change it to? ";
+			cin >> pricechage;
+			cout << milk->changepriceomlk(pricechage);
+			break;
+
+		case 4:
+			float pricechange;
+			cout << "what do you want to change it to? ";
+			cin >> pricechange;
+			cout << bread->changepriceobread(pricechange);
+
+		case 5:
+			int k;
+			cout << "how many do you want to add?";
+			cin >> k;
+			cout << milk->addmilk(k);
+			break;
+
+		case 6:
+			int q;
+			cout << "how many do you want to add?";
+			cin >> q;
+			cout << bread->addbread(q);
+			break;
+
+		case 7:
+			milk->getitems();
+
+		case 8:
+			cout << "peice out homie";
+
+		}
+		
+	} while (userInput != 8);
+}
